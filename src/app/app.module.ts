@@ -9,18 +9,22 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule} from '@angular/fire/auth';
 import { AuthService } from './services/auth/auth.service';
+import { HomeComponent } from './home/home.component';
+import { CollapseModule } from "ngx-bootstrap/collapse";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    CollapseModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
