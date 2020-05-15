@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User, auth } from 'firebase';
+import { User } from 'firebase'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
