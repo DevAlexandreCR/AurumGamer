@@ -14,12 +14,12 @@ export class MainGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    return this.checkLogin(state.url);
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    return this.checkLogin(state.url);
   }
 
     /**
@@ -28,8 +28,10 @@ export class MainGuard implements CanActivate, CanActivateChild {
    */
   checkLogin(url?: string): boolean{
     if (this.authService.isLogin) {
+      console.log(true);
       return true;
     } else {
+      console.log(false);
       return false
     }
   }

@@ -11,6 +11,8 @@ import { AngularFireAuthModule} from '@angular/fire/auth';
 import { AuthService } from './services/auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { CollapseModule } from "ngx-bootstrap/collapse";
+import { TabsModule } from "ngx-bootstrap/tabs";
+import { ToastrModule } from 'ngx-toastr'
 
 
 @NgModule({
@@ -24,7 +26,14 @@ import { CollapseModule } from "ngx-bootstrap/collapse";
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    ToastrModule.forRoot(
+      { positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      autoDismiss: true,
+      tapToDismiss: true
+    }),
     CollapseModule.forRoot(),
+    TabsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],

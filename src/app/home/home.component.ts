@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
-    body.classList.add("landing-page");
+    body.classList.add("index-page");
 
     var canvas: any = document.getElementById("chartBig");
     var ctx = canvas.getContext("2d");

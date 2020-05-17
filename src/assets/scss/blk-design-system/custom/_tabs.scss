@@ -3,6 +3,7 @@
 .nav-tabs {
   border: 0;
   padding: $padding-base-vertical $padding-base-horizontal;
+  background-color: $transparent-bg;
 
   > .nav-item {
     > .nav-link {

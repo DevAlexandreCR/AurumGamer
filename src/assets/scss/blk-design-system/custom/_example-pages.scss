@@ -31,11 +31,11 @@
 
   .squares {
     animation: move-left-right 1s infinite;
-    @include linear-gradient($primary-states, $primary);
+    @include linear-gradient($primary-states, $default);
     position: absolute;
     transition: 0.5s ease-out;
     overflow: hidden;
-    border-radius: 20%;
+    border-radius: 100%;
     &.square1 {
       animation: move-left-right 4s infinite;
       height: 300px;

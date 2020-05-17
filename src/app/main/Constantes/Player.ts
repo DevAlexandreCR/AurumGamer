@@ -13,7 +13,7 @@ export class Player {
     phone: string// único para cada cuenta
     balance: number // oro ejm 300 de oro o 300 monedas de oro
     date_addm: Date
-    platform_to_play: [] // PS4, XBOXONE, PC
+    platform_to_play: ['PS4','XBOXONE', 'PC'] // PS4, XBOXONE, PC
     games: [Game] // FIFA20, FIFA19, PES20, PES19
     matches: [string] // almacena las referencias de las partidas jugadas
     pay_account: {
