@@ -25,4 +25,8 @@ export class MainComponent implements OnInit {
     })
   }
 
+  signOut() {
+    this.authService.logout().catch(e=>{ alert(`ocuurrió un error al cerrar la sesión: ${e.message}`) });
+    }
+
 }

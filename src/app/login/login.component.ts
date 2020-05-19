@@ -139,4 +139,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       "deg)";
   }
 
+  login(email: string, pass: string) {
+    if(this.isEmail(email)) {
+      this.authService.login(email, pass).catch(e => {
+            this.toast.error( e.message, e.code )
+      })
+    } else {
+      this.toast.error('Intente con un email válido', 'Email no válido' )
+    }
+    
+  }
+
 }

@@ -13,7 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { CollapseModule } from "ngx-bootstrap/collapse";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { ToastrModule } from 'ngx-toastr'
-
+import { ModalModule } from "ngx-bootstrap/modal";
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr'
       autoDismiss: true,
       tapToDismiss: true
     }),
+    ModalModule.forRoot(),
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),

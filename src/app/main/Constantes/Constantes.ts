@@ -29,6 +29,7 @@ export class Constantes {
     public static GAME_PES19 = 'PES19'
     public static GAME_PES20 = 'PES20'
     public static GAMES = {fifa19: 'FIFA19', fifa20: 'FIFA20', pes19: 'PES19',pes20: 'PES20'}
+    public static PLATFORM_TO_PLAY = { ps4: 'PS4', xboxone: 'XBOXONE', pc: 'PC'}
 
     /**
      * rutas de base de datos

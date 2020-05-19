@@ -136,6 +136,8 @@
                             placeholder="Email"
                             type="email"
                             (blur)="focus1 = false"
+                            name="email"
+                            [(ngModel)]="email"
                           />
                         </div>
                       </div>
@@ -155,6 +157,8 @@
                             type="password"
                             (focus)="focus2 = true"
                             (blur)="focus2 = false"
+                            name="pass"
+                            [(ngModel)]="pass"
                           />
                         </div>
                       </div>
@@ -173,7 +177,7 @@
                     </form>
                   <div class="card-footer">
                     <div class="text-center">
-                      <button class="btn btn-primary my-4" type="button">
+                      <button class="btn btn-primary my-4" type="button" (click)="login(email, pass)">
                         Iniciar sesión
                       </button>
                     </div>
