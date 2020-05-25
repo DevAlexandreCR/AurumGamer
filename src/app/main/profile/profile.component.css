@@ -1,0 +1,12 @@
+.lottie_charging{
+    z-index: 100;
+}
+.container-lottie{
+    position: absolute;
+    display: flex;
+    background-color: #141111fa;
+}
+.wrapper {
+    text-align: center;
+    margin: auto;
+}

@@ -54,19 +54,7 @@
         <li class="nav-item p-0">
           <a
             class="nav-link"
-            href="https://twitter.com/CreativeTim"
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Twitter"
-          >
-            <i class="fab fa-twitter"> </i>
-            <p class="d-lg-none d-xl-none">Twitter</p>
-          </a>
-        </li>
-        <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://www.facebook.com/CreativeTim"
+            href="https://www.facebook.com/Lasuerteestabajocontrol/"
             placement="bottom"
             target="_blank"
             tooltip="Like us on Facebook"
@@ -78,7 +66,7 @@
         <li class="nav-item p-0">
           <a
             class="nav-link"
-            href="https://www.instagram.com/CreativeTimOfficial"
+            href="https://www.facebook.com/Lasuerteestabajocontrol/"
             placement="bottom"
             target="_blank"
             tooltip="Follow us on Instagram"
@@ -88,7 +76,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/']"> Back to Home </a>
+          <a class="nav-link" [routerLink]="['/home']"> Inicio </a>
         </li>
       </ul>
     </div>
@@ -105,6 +93,7 @@
               <tabset class="nav-tabs-primary">
                 <tab heading="Login">
                   <div class="card-body">
+                    <!-- 
                     <div class="btn-wrapper text-center">
                       <div class="text-center text-muted mb-4 mt-3">
                         <small> Inicia con facebook </small>
@@ -118,7 +107,7 @@
                     </div>
                     <div class="text-center text-muted mb-4 mt-3">
                       <small> O con email y password </small>
-                    </div>
+                    </div>-->
                     <form role="form" autocomplete="off">
                       <div class="form-group mb-3" >
                         <div
@@ -134,7 +123,9 @@
                           <input
                             class="form-control"
                             placeholder="Email"
+                            autocomplete="off"
                             type="email"
+                            required 
                             (blur)="focus1 = false"
                             name="email"
                             [(ngModel)]="email"
@@ -153,8 +144,10 @@
                           </div>
                           <input
                             class="form-control"
+                            autocomplete="off"
                             placeholder="Password"
                             type="password"
+                            required 
                             (focus)="focus2 = true"
                             (blur)="focus2 = false"
                             name="pass"
@@ -186,6 +179,7 @@
                 </tab>
                 <tab heading="Registro">
                   <div class="card-body">
+                    <!-- 
                     <div class="btn-wrapper text-center">
                       <div class="text-center text-muted mb-4 mt-3">
                         <small> Regístrate con facebook</small>
@@ -200,6 +194,7 @@
                     <div class="text-center text-muted mb-4 mt-3">
                       <small> O con email y password </small>
                     </div>
+                    -->
                     <form class="form" autocomplete="off">
                       <div
                         class="input-group"
@@ -214,9 +209,10 @@
                           class="form-control"
                           placeholder="Email"
                           type="email"
+                          required 
                           (focus)="focus = true"
                           (blur)="focus = false"
-                          autocomplete="none"
+                          autocomplete="off"
                           name="email"
                           [(ngModel)]="email"
                         />
@@ -233,6 +229,8 @@
                         <input
                           class="form-control"
                           placeholder="Password"
+                          autocomplete="off"
+                          required 
                           name="pass"
                           [(ngModel)]="pass"
                           type="password"
@@ -263,16 +261,22 @@
                       </div>
                       <div class="form-check text-left">
                         <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" />
+                          <input class="form-check-input" type="checkbox" name="checkTerms" [(ngModel)]="aceptTermsOfservice"
+                          (change)="!aceptTermsOfservice"/>
                           <span class="form-check-sign"> </span> Acepto
-                          <a href="javascript:void(0)"> terminos y condiciones </a> .
+                          <a [routerLink]="['/legal']" target="blank"> terminos y condiciones </a> .
                         </label>
                       </div>
                     </form>
                   <div class="card-footer">
                     <div class="text-center">
-                      <button class="btn btn-primary my-4" type="button"
+                      <button class="btn btn-primary my-4" type="submit" *ngIf="aceptTermsOfservice"
                       name="btn-registrar"
+                      (click)="singUp(email, pass, pass2)">
+                        Registrar
+                      </button>
+                      <button class="btn btn-primary my-4" type="submit" *ngIf="!aceptTermsOfservice"
+                      name="btn-registrar" disabled
                       (click)="singUp(email, pass, pass2)">
                         Registrar
                       </button>

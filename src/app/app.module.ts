@@ -14,12 +14,14 @@ import { CollapseModule } from "ngx-bootstrap/collapse";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { ToastrModule } from 'ngx-toastr'
 import { ModalModule } from "ngx-bootstrap/modal";
+import { LegalComponent } from './legal/legal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    LegalComponent
   ],
   imports: [
     BrowserAnimationsModule,

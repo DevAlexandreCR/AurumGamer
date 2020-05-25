@@ -14,7 +14,7 @@ export class MainGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.checkLogin(state.url);
+    return this.checkLoginHome(state.url);
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -28,10 +28,24 @@ export class MainGuard implements CanActivate, CanActivateChild {
    */
   checkLogin(url?: string): boolean{
     if (this.authService.isLogin) {
-      console.log(true);
       return true;
     } else {
-      console.log(false);
+      /** si intenta acceder al main sin estar logueado lo devuelve al home */
+      this.router.navigate(['/home'], { skipLocationChange: true})
+      return false
+    }
+  }
+
+      /**
+   * Funcion para verificar si el usuario está logueado
+   * @param url recibe la url de donde se hace la navegacion
+   */
+  checkLoginHome(url?: string): boolean{
+    if (this.authService.isLogin) {
+      return true;
+    } else {
+      console.log(url);
+      if(url === '/') this.router.navigate(['/home'], { skipLocationChange: true})
       return false
     }
   }

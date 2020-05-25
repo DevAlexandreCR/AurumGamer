@@ -1,37 +1,41 @@
-<div class="wrapper" style="padding-top: 5rem;">
-  <div class="page-header">
-    <img class="dots" src="assets/img/dots.png" />
+<div class="wrapper">
+  <div class="page-header" >
+    <div class="squares square1"></div>
+    <div class="squares square2"></div>
+    <div class="squares square3"></div>
+    <div class="squares square4"></div>
+    <div class="squares square5"></div>
+    <div class="squares square6"></div>
+    <div class="squares square7"></div>
 
-    <img class="path" src="assets/img/path4.png" />
-
-    <div class="alert alert-danger alert-with-icon" role="alert" *ngIf="errorDataProfile" >
-      <span data-notify="icon" class="tim-icons icon-alert-circle-exc" *ngIf=""></span>
-      <span><b>  Ups! - </b> Hubo un error al cargar tu perfil, actualiza la página. Si el error persiste comunicate con nosotros</span>
-    </div>
-
-    <div class="container align-items-center " style="padding-top: 5rem;">
+    <div class="container" >
       <div class="row">
         <div class="col-lg-6 col-md-6">
           <div class="card card-coin card-plain">
             <div class="card-header">
-              <img *ngIf="player.url_photo"
+              <img
+               *ngIf="player"
                 class="img-center img-fluid rounded-circle"
                 [src]="player.url_photo"
-              />
-              <img *ngIf="!player.url_photo"
+                width="200px"
+                height="200px"
+              />  
+              <img
+                *ngIf="player === undefined"
                 class="img-center img-fluid rounded-circle"
-                src="../../../assets/img/ryan.jpg"
-              /> 
+                src="../../../assets/img/landing.png"
+                width="200px"
+                height="200px"
+              />
               <button
-              *ngIf="!player.url_photo"
-              class="btn btn-simple btn-danger btn-icon btn-round float-right" 
-              style="margin-right: 10%; margin-top: -20%;"
-              type="submit"
-            >
-              <i class="tim-icons icon-pencil"> </i>
-            </button>
-              <h4 class="title">{{player.nickname}}</h4>
+              class="btn btn-info btn-fab btn-icon btn-round float-right" 
+              style="margin-top: -20%; z-index: 100;"
+              data-target="#modalProfilePhoto"
+              (click)="modalProfilePhoto.show()"
+            >        <i class="tim-icons icon-pencil"> </i>
+          </button>      
             </div>
+            <h3 class="title">{{player.nickname}}</h3>
             <div class="card-body">
               <tabset
                 class="nav-tabs-danger justify-content-center tab-subcategories"
@@ -43,10 +47,10 @@
                       <div class="form-group">
                         <input
                           class="form-control"
-                          placeholder="id player"
+                          placeholder="cuenta de jugador"
                           type="text"
                           readonly
-                          [(ngModel)]="player.id"
+                          [(ngModel)]="player.email"
                         />
                       </div>
                     </div>
@@ -75,18 +79,23 @@
               </tabset>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+          <div class="alert alert-danger alert-with-icon" role="alert" *ngIf="errorDataProfile" >
+            <span data-notify="icon" class="tim-icons icon-alert-circle-exc" *ngIf=""></span>
+            <span><b>  Ups! - </b> Hubo un error al cargar tu perfil, actualiza la página. Si el error persiste comunicate con nosotros</span>
+          </div>
           <div class="alert alert-danger" role="alert" *ngIf="!player.profile_complete" >
             Completa tu perfil de jugador para terminar tu registro!
           </div>
           <div class="alert alert-danger" role="alert" *ngIf="!player.email_verified" >
-            Tu email aun no ha sido verificado 
+            Tu email aun no ha sido verificado <br>
+            Si ya recibiste el correo por favor recarga la página
           </div>
+        </div>
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
           <div class="card card-plain">
             <div class="card-header">
               <h1 class="profile-title text-left">Perfil</h1>
-              <h5 class="text-on-back">Go</h5>
+              <h5 class="text-on-back">Mi</h5>
             </div>
             <div class="card-body">
               <form>
@@ -94,7 +103,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Tu Nombre </label>
-                      <input class="form-control" placeholder="Mi nombre" name="name" type="text" [(ngModel)]="player.name" />
+                      <input class="form-control" placeholder="Mi nombre" name="name" type="text" [(ngModel)]="player.name" (ngModelChange)="isDataProfileChanged($event, 'name')" />
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -102,12 +111,12 @@
                       <label> Email </label>
                       <input
                         class="form-control"
-                        placeholder="mike@email.com"
+                        placeholder="micorreo@email.com"
                         type="email"
                         name="email"
                         readonly
                         [(ngModel)]="player.email"
-                      /> <a class="btn btn-link btn-sm " *ngIf="!player.email_verified">  Verifica tu email</a>
+                      /> <a class="btn btn-link btn-sm " *ngIf="!player.email_verified" (click)="sendEmailVerification(user)">  Verifica tu email</a>
                     </div>
                   </div>
                 </div>
@@ -176,10 +185,82 @@
           </div>
         </div>
       </div>
+
+      <!-- modal cambiar imagen -->
+      <div
+      aria-hidden="true"
+      aria-labelledby="myModalLabel"
+      bsModal
+      class="modal fade modal-black"
+      #modalProfilePhoto="bs-modal"
+      id="modalProfilePhoto"
+      role="dialog"
+      tabindex="-1"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <button
+              aria-hidden="true"
+              class="close"
+              data-dismiss="modal"
+              (click)="modalProfilePhoto.hide()"
+              type="button"
+            >
+              <i class="tim-icons icon-simple-remove text-white"> </i>
+            </button>
+            <div class="text-muted text-center ml-auto mr-auto">
+              <h3 class="mb-0">Cambiar foto de perfil</h3>
+            </div>
+          </div>
+          <div class="modal-body ">
+            <div class="modal-profile">
+              <img
+                id="preview"
+                class="img-center img-fluid rounded-circle"
+                [src]="profile_photo_preview"
+                width="200px"
+                height="200px"
+              />
+          </div>
+            <form role="form">
+              <div class="form-group mb-3">
+                <div
+                  class="input-group input-group-alternative"
+                >
+                  <div class="input-group-prepend align-items-center">
+                    <button class="btn btn-default">
+                      Selecciona foto
+                    </button>
+                    <input
+                    type="file"
+                    (change)="selectFile($event)"
+                    accept="image/png, .jpeg, .jpg, image/gif"
+                  />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="progress-container progress-primary" *ngIf="porcentaje > 0 ">
+                  <span class="progress-badge"> Subiendo... </span>
+                  <progressbar class="progress-bar-primary" [value]="porcentaje">
+                    <span class="progress-value">{{porcentaje}} % </span>
+                  </progressbar>
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-primary my-4" name="change_photo" type="button" 
+                *ngIf="profile_photo_preview != profile_photo && porcentaje < 1"
+                (click)="updateProfilePhoto(player.id, profile_photo, modalProfilePhoto)"
+                >
+                  Guardar cambios
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
-  <section class="section">
-
-  </section>
 </div>
-

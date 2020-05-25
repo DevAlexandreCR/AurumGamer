@@ -1,1 +1,56 @@
 <router-outlet></router-outlet>
+<footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"><h1 class="title">AurumGamer</h1></div>
+        <div class="col-md-3">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/home']"> Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.facebook.com/Lasuerteestabajocontrol/">
+                Contáctanos
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                Acerca de
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/legal']" target="blank">
+                  Terminos y Condiciones
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/legal']" target="blank" > ©Copyright 2020 AurumGamer.com </a>
+              </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h3 class="title">Síguenos:</h3>
+          <div class="btn-wrapper profile">
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
+              href="https://www.facebook.com/Lasuerteestabajocontrol/"
+              target="_blank"
+            >
+              <i class="fab fa-facebook-square"> </i>
+            </a>
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple"
+              href="https://www.facebook.com/Lasuerteestabajocontrol/"
+              target="_blank"
+            >
+              <i class="fab fa-instagram"> </i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>

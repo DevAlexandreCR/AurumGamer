@@ -28,11 +28,12 @@ export class PlayerService {
    * @param id id de firebase 
    */
   getPlayerById(id: string) {
-    return this.player_doc = this.afs.doc<Player>(`player/${id}`)
+    return this.afs.doc<Player>(`player/${id}`)
   }
 
   updatePlayer(player: Player) {
     this.player_doc = this.afs.doc<Player>(`${Constantes.PLAYER_COLLECTION}/${player.id}`)
-    return this.player_doc.update( Object.assign({}, player) )
+    return this.player_doc.set( Object.assign({}, player), {merge: true} )
   }
+
 }

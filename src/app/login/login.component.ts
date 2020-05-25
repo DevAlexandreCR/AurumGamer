@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   email: string
   pass: string
   pass2: string
+  aceptTermsOfservice: boolean = false
   constructor( private toast: ToastrService, private authService: AuthService) { }
 
 
@@ -67,6 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.isEmail(email)) {
       if (this.isPassCorrect(pass, pass2)) {
         this.authService.signUp(email, pass).then(() => {
+          localStorage.setItem('session', JSON.stringify({ navigate_from: 'home'}))
           this.toast.success('registrado exitosamente', 'Bienvenido a AurumGamer')
         }).catch(err => {          
           this.toast.error(err, 'Intente Nuevamente')        
@@ -139,9 +141,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       "deg)";
   }
 
-  login(email: string, pass: string) {
+  login(email: string, pass: string) {    
     if(this.isEmail(email)) {
-      this.authService.login(email, pass).catch(e => {
+      this.authService.login(email, pass)
+      .then(user => {localStorage.setItem('session', JSON.stringify({ navigate_from: 'home'}))})
+      .catch(e => {
             this.toast.error( e.message, e.code )
       })
     } else {

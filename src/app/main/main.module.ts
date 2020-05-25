@@ -10,6 +10,14 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from "ngx-bootstrap/modal";
+import { ProgressbarModule } from "ngx-bootstrap/progressbar";
+import { AlertModule } from "ngx-bootstrap/alert";
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [ProfileComponent, MainComponent],
@@ -18,10 +26,13 @@ import { ModalModule } from "ngx-bootstrap/modal";
     CommonModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
+    LottieModule.forRoot({ player: playerFactory }),
+    ProgressbarModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
     CarouselModule.forRoot(),
     TabsModule.forRoot(),
+    AlertModule.forRoot(),
     AngularFireStorageModule,
     AngularFirestoreModule,
     MainRoutingModule

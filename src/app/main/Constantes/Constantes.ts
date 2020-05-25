@@ -39,4 +39,7 @@ export class Constantes {
     /** para el acceso a los archivos de los comprobantes */
     public static RUTA_COMPROBANTES = 'comprobantes'
 
+    public static PROFILE_PHOTO = 'profile_photo'
+    public static URL_PHOTO = 'url_photo'
+
 }

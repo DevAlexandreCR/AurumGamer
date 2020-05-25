@@ -7,7 +7,7 @@
     <div class="navbar-translate">
       <a
         class="navbar-brand"
-        [routerLink]="['/home']"
+        href="#"
         placement="bottom"
         tooltip="Designed and Coded by Creative Tim"
       >
@@ -66,7 +66,7 @@
 aria-hidden="true"
 aria-labelledby="myModalLabel"
 bsModal
-class="modal fade modal-mini modal-danger modal-mini"
+class="modal fade modal-mini modal-primary"
 #modalSalir="bs-modal"
 id="modalSalir"
 role="dialog"
@@ -82,17 +82,17 @@ tabindex="-1"
         (click)="modalSalir.hide()"
         type="button"
       >
-        <i class="tim-icons icon-simple-remove text-white"> </i>
+        <i class="tim-icons icon-simple-remove text-black"> </i>
       </button>
       <div class="modal-profile">
         <i class="tim-icons icon-button-power"> </i>
       </div>
     </div>
     <div class="modal-body">
-      <p>¿ Seguro desea salir ?</p>
+      <p style="color: black;">¿ Seguro desea salir ?</p>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-link btn-primary" type="button" (click)="signOut()">Cerrar Sesión</button>
+      <button class="btn btn-link btn-default" type="button" style="color: black;" (click)="signOut()">Cerrar Sesión</button>
       <button
         class="btn btn-link btn-neutral"
         data-dismiss="modal"
@@ -105,41 +105,3 @@ tabindex="-1"
   </div>
 </div>
 </div>
-<footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3"><h1 class="title">AurumGamer</h1></div>
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-3">
-          <p>Copiride</p>
-        </div>
-        <div class="col-md-3">
-          <h3 class="title">Síguenos:</h3>
-          <div class="btn-wrapper profile">
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://www.facebook.com/Lasuerteestabajocontrol/"
-              target="_blank"
-            >
-              <i class="fab fa-twitter"> </i>
-            </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://www.facebook.com/Lasuerteestabajocontrol/"
-              target="_blank"
-            >
-              <i class="fab fa-facebook-square"> </i>
-            </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple"
-              href="https://www.facebook.com/Lasuerteestabajocontrol/"
-              target="_blank"
-            >
-              <i class="fab fa-dribbble"> </i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>

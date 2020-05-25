@@ -20,6 +20,7 @@ export class AuthService {
     this.usuario.subscribe(authState => {
       if (authState) {
        this.isLogin = true
+       this.router.navigate(['/main/'])
       }
     });
     }
@@ -39,5 +40,6 @@ export class AuthService {
   passwordReset(email: string) {
     return this.afAuth.sendPasswordResetEmail(email)
   }
+
   
 }

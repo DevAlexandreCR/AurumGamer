@@ -7,7 +7,7 @@ import { MainComponent } from './main.component';
 const routes: Routes = [
   { path: '', component: MainComponent, children: [
     { path: ':id', component: ProfileComponent}
-  ]}
+  ]},
 ];
 
 @NgModule({

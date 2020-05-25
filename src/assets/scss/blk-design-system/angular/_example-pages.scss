@@ -1,11 +1,11 @@
 .index-page .squares {
-  @include linear-gradient($danger-states, $danger);
+  @include linear-gradient($danger-states, $primary);
 }
 .register-page,
 .section.section-signup {
   .squares,
   .square {
-    @include linear-gradient($danger-states, $danger);
+    @include linear-gradient($danger-states, $primary);
   }
 }
 .footer {

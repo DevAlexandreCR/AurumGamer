@@ -20,13 +20,13 @@ export class MainComponent implements OnInit {
       this.user = user
       let id = this.user.uid
       this.router.navigate(['/main/profile', { id: id}])
-      console.log(id);
       
     })
   }
 
   signOut() {
-    this.authService.logout().catch(e=>{ alert(`ocuurrió un error al cerrar la sesión: ${e.message}`) });
+    this.authService.logout().catch(e=>{ alert(`ocuurrió un error al cerrar la sesión: ${e.message}`) })
+                             .then(()=>{ this.router.navigate(['/login']); localStorage.clear()})
     }
 
 }
