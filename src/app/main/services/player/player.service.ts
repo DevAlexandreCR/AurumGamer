@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore/';
 import { AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore/public_api';
 import { Player } from '../../Constantes/Player';
 import { Constantes } from '../../Constantes/Constantes';
+import { Pay_Account } from '../../Constantes/Pay_Account';
+import { PaymentRquest } from '../../Constantes/PaymentRquest';
 
 
 @Injectable({
@@ -36,4 +38,17 @@ export class PlayerService {
     return this.player_doc.set( Object.assign({}, player), {merge: true} )
   }
 
+  addPaymentRequets(paymentRequest: PaymentRquest) {
+    const id = this.afs.createId()
+    paymentRequest.id = id
+    paymentRequest.date_add = new Date()
+    paymentRequest.state = Constantes.STATE_PAYMENT_PENDING
+    const payColllection = this.afs.collection<PaymentRquest>(Constantes.PAYMENTS_REQUEST)
+    return payColllection.doc(id).set(Object.assign({}, paymentRequest))
+  }
+
+  getPendingPayments(player_id: string){
+    let coll = this.afs.collection<PaymentRquest>(Constantes.PAYMENTS_REQUEST).ref
+    return coll.where('player.id','==', player_id).where('state', '==', Constantes.STATE_PAYMENT_PENDING).get()
+  }
 }

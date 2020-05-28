@@ -14,13 +14,14 @@ import { ProgressbarModule } from "ngx-bootstrap/progressbar";
 import { AlertModule } from "ngx-bootstrap/alert";
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { PaymentsComponent } from './payments/payments.component';
 
 export function playerFactory() {
   return player;
 }
 
 @NgModule({
-  declarations: [ProfileComponent, MainComponent],
+  declarations: [ProfileComponent, MainComponent, PaymentsComponent],
   imports: [
     FormsModule,
     CommonModule,

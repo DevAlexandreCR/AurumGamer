@@ -1,3 +1,12 @@
+
+<div class="alert alert-info alert-custom alert-with-icon" role="alert" *ngIf="player.profile_complete" >
+  <span data-notify="icon" class="tim-icons icon-check-2" ></span>
+  <span><b>  Todo listo! - </b> Para competir ve al grupo de preferencia y crea tu primer reto, ingresa a 
+    <a class="link" href="https://chat.whatsapp.com/CZhnIUXPIxcHOliTMhYazJ"
+    target="blank"> FIFA20 </a> o 
+    <a href="https://chat.whatsapp.com/Fv2XDbYd9et4A9da3Ws0HE"
+    target="blank"> PES20 </a> </span>
+</div>
 <div class="wrapper">
   <div class="page-header" >
     <div class="squares square1"></div>
@@ -7,26 +16,17 @@
     <div class="squares square5"></div>
     <div class="squares square6"></div>
     <div class="squares square7"></div>
-
     <div class="container" >
       <div class="row">
         <div class="col-lg-6 col-md-6">
           <div class="card card-coin card-plain">
             <div class="card-header">
               <img
-               *ngIf="player"
                 class="img-center img-fluid rounded-circle"
                 [src]="player.url_photo"
                 width="200px"
                 height="200px"
               />  
-              <img
-                *ngIf="player === undefined"
-                class="img-center img-fluid rounded-circle"
-                src="../../../assets/img/landing.png"
-                width="200px"
-                height="200px"
-              />
               <button
               class="btn btn-info btn-fab btn-icon btn-round float-right" 
               style="margin-top: -20%; z-index: 100;"
@@ -72,6 +72,8 @@
                   <button
                     class="btn btn-simple btn-danger btn-icon btn-round float-right"
                     type="submit"
+                    data-target="#modalCash"
+                    (click)="modalCash.show()"
                   >
                     <i class="tim-icons icon-money-coins"> </i>
                   </button>
@@ -89,6 +91,10 @@
           <div class="alert alert-danger" role="alert" *ngIf="!player.email_verified" >
             Tu email aun no ha sido verificado <br>
             Si ya recibiste el correo por favor recarga la página
+          </div>
+          <div class="alert alert-info alert-with-icon" role="alert" *ngIf="pending_payments > 0" >
+            <span data-notify="icon" class="tim-icons icon-bell-55" ></span>
+            <span><b>  vaya! - </b> Tienes {{pending_payments}} solicitud de pago pendientes</span>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 ml-auto mr-auto">
@@ -130,6 +136,7 @@
                         name="nickname"
                         placeholder="Mi Imponente Nickname"
                         [(ngModel)]="player.nickname"
+                        (ngModelChange)="isDataProfileChanged($event, 'nickname')"
                       />
                     </div>
                   </div>
@@ -138,10 +145,11 @@
                       <label> Telefono </label>
                       <input
                         class="form-control"
-                        type="text"
+                        type="number"
                         name="phone"
                         placeholder="000-000-0000"
                         [(ngModel)]="player.phone"
+                        (ngModelChange)="isDataProfileChanged($event, 'phone')"
                       />
                     </div>
                   </div>
@@ -156,6 +164,7 @@
                         type="number"
                         name="age"
                         [(ngModel)]="player.age"
+                        (ngModelChange)="isDataProfileChanged($event, 'age')"
                       />
                     </div>
                   </div>
@@ -165,7 +174,7 @@
                 placement="left"
                 type="button"
                 name="btnedit"
-                *ngIf="isEditing"
+                *ngIf="isEditing && player.profile_complete"
                 (click)="saveProfile(player)"
               >
                 Guardar Cambios
@@ -261,6 +270,107 @@
         </div>
       </div>
     </div>
+
+    <!-- modal retiro fondos y proximamante recargas -->
+    <div
+    aria-hidden="true"
+    aria-labelledby="myModalLabel"
+    bsModal
+    class="modal fade modal-black"
+    #modalCash="bs-modal"
+    id="modalCash"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <button
+            aria-hidden="true"
+            class="close"
+            data-dismiss="modal"
+            (click)="modalCash.hide()"
+            type="button"
+          >
+            <i class="tim-icons icon-simple-remove text-white"> </i>
+          </button>
+          <div class="text-muted text-center ml-auto mr-auto">
+            <h3 class="mb-0">Confirmar Cuenta</h3>
+          </div>
+        </div>
+        <div class="modal-body ">
+          <form role="form">
+            <div class="form-group">
+              <label for="name_account">Nombre Completo</label>
+              <input type="text" class="form-control" id="name_account" name="name_account" aria-describedby="namelHelp" placeholder="Enter full name"
+              [(ngModel)]="pay_account.name" (ngModelChange)="idDataPaymentComplete($event, pay_account)">
+              <small id="namelHelp" class="form-text text-muted">Nombre completo del titular de la cuenta</small>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputTypeDoc">Tipo </label>
+                <select id="inputTypeDoc" class="form-control" disabled>
+                  <option selected>CC</option>
+                </select>
+              </div>
+              <div class="form-group col-md">
+                <label for="cc_account">Número de identificacion</label>
+                <input type="number" class="form-control" id="cc_account" name="cc_account" aria-describedby="cclHelp" placeholder="Enter ID"
+                [(ngModel)]="pay_account.cc" (ngModelChange)="idDataPaymentComplete($event, pay_account)">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputBanco">Banco </label>
+                <select id="inputBanco" class="form-control" name="bank" [(ngModel)]="pay_account.bank" (ngModelChange)="idDataPaymentComplete($event, pay_account)">
+                  <option>Nequi</option>
+                  <option>Bancolombia</option>
+                </select>
+              </div>
+              <div class="form-group col-md">
+                <label for="number_account">Número de cuenta</label>
+                <input type="number" class="form-control" id="number_account" name="number_account" aria-describedby="num_acclHelp" placeholder="number account"
+                [(ngModel)]="pay_account.number_account" (ngModelChange)="idDataPaymentComplete($event, pay_account)">
+                <small id="num_acclHelp" class="form-text text-muted">Solo se aceptan cuentas de ahorro</small>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="player_balance">Disponible</label>
+                <input type="number" class="form-control" id="player_balance" name="player_balance" aria-describedby="num_acclHelp" placeholder="0 COP" disabled
+                [(ngModel)]="player.balance">
+              </div>
+              <div class="form-group col-md">
+                <label for="cash_to_pay">Valor a retirar</label>
+                <input type="number" class="form-control" id="cash_to_pay" name="cash_to_pay" aria-describedby="cash_to_paylHelp" placeholder="0 COP"
+                [(ngModel)]="cash_to_pay" (ngModelChange)="idDataPaymentComplete($event, pay_account)">
+                <small id="cash_to_paylHelp" class="form-text text-muted">Solo puedes retirar más de 10000COP</small>
+              </div>
+            </div>
+            <div class="form-check text-left">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="save_account" [(ngModel)]="save_account"
+                (change)="!save_account"/>
+                <span class="form-check-sign"> </span> Guardar Cuenta
+              </label>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-primary my-4" name="change_photo" type="button" *ngIf="!isDataPaymentComplete"
+              disabled
+              >
+                Solicitar
+              </button>
+              <button class="btn btn-primary my-4" name="change_photo" type="button" *ngIf="isDataPaymentComplete"
+              (click)="solicitarRetiroDeFondos(player, pay_account, save_account, cash_to_pay, modalCash)"
+              >
+                Solicitar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
 </div>

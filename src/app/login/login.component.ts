@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.isEmail(email)) {
       if (this.isPassCorrect(pass, pass2)) {
         this.authService.signUp(email, pass).then(() => {
-          localStorage.setItem('session', JSON.stringify({ navigate_from: 'home'}))
+          localStorage.setItem('session', JSON.stringify({ navigate_from: 'signUp'}))
           this.toast.success('registrado exitosamente', 'Bienvenido a AurumGamer')
         }).catch(err => {          
           this.toast.error(err, 'Intente Nuevamente')        

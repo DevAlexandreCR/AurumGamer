@@ -10,3 +10,11 @@
     text-align: center;
     margin: auto;
 }
+
+.alert-custom{
+    position: absolute;
+    margin-top: 5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    z-index: 100;
+}
