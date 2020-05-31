@@ -315,7 +315,7 @@
               </div>
               <div class="form-group col-md">
                 <label for="cc_account">Número de identificacion</label>
-                <input type="number" class="form-control" id="cc_account" name="cc_account" aria-describedby="cclHelp" placeholder="Enter ID"
+                <input type="number" class="form-control" id="cc_account" name="cc_account" aria-describedby="cclHelp" placeholder="Enter CC"
                 [(ngModel)]="pay_account.cc" (ngModelChange)="idDataPaymentComplete($event, pay_account)">
               </div>
             </div>
@@ -355,7 +355,7 @@
               </label>
             </div>
             <div class="text-center">
-              <button class="btn btn-primary my-4" name="change_photo" type="button" *ngIf="!isDataPaymentComplete"
+              <button class="btn btn-primary my-4" name="change_photo1" type="button" *ngIf="!isDataPaymentComplete"
               disabled
               >
                 Solicitar

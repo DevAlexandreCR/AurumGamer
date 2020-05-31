@@ -47,4 +47,7 @@ export class Constantes {
     public static STATE_PAYMENT_PENDING = 'pendiente'
     public static STATE_PAYMENT_SUCCESS = 'aprobado'
     public static STATE_PAYMENT_REJECTED = 'rechazado'
+
+    public static COLLECTION_DEFAULTS = 'constants'
+    public static COLL_PAY_ACCOUNT_DEFAULT = 'pay_account_default'
 }

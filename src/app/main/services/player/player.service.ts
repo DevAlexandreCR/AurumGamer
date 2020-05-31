@@ -51,4 +51,12 @@ export class PlayerService {
     let coll = this.afs.collection<PaymentRquest>(Constantes.PAYMENTS_REQUEST).ref
     return coll.where('player.id','==', player_id).where('state', '==', Constantes.STATE_PAYMENT_PENDING).get()
   }
+
+  getDefault(constant: string) {
+    switch (constant){
+      case Constantes.COLL_PAY_ACCOUNT_DEFAULT:
+        return this.afs.doc<Pay_Account>(`${Constantes.COLLECTION_DEFAULTS}/${Constantes.COLL_PAY_ACCOUNT_DEFAULT}`)
+      break
+    }
+  }
 }

@@ -76,12 +76,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         return;}
       this.player = player 
       if (this.player.pay_account != undefined) this.pay_account = this.player.pay_account  
+      else {
+        this.playerService.getDefault(Constantes.COLL_PAY_ACCOUNT_DEFAULT).valueChanges()
+        .subscribe(doc => {
+          this.pay_account = doc
+        })
+      }
       this.profile_photo_preview = player.url_photo
       this.profile_photo = this.profile_photo_preview
       this.authService.usuario.subscribe(user => {
         if (user === null )  return;
         this.user = user
-        this.player.email_verified = user.emailVerified
+        if (!this.player.email_verified && user.emailVerified ) {
+          this.player.email_verified = user.emailVerified
+          this.playerService.updatePlayer(this.player)
+        }
         if(this.player.profile_complete) {
           this.playerService.getPendingPayments(id).then((snapshot)=>{
             if(snapshot.empty) this.pending_payments = 0
@@ -231,7 +240,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   idDataPaymentComplete(e: any, pay_account: Pay_Account) {
-    if(pay_account.name.length < 10 || pay_account.bank === '' || pay_account.cc.length < 8 || pay_account.number_account < 10
+    if(pay_account.name === undefined) return
+    if(pay_account.name.length < 10 || pay_account.bank == '' || pay_account.cc.length < 8 || pay_account.number_account < 10
     || this.cash_to_pay < 10000) { this.isDataPaymentComplete = false}
     else { this.isDataPaymentComplete = true} 
   }
